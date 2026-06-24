@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML House Price Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob shape1"></div>
+        <div class="blob shape2"></div>
+        <div class="blob shape3"></div>
+    </div>
+
+    <div class="container">
+        <header class="hero">
+            <h1>California Housing Predictor</h1>
+            <p>An end-to-end Machine Learning pipeline utilizing Random Forest to predict property values with high accuracy.</p>
+        </header>
+
+        <main class="main-content">
+            <section class="prediction-section glass-panel">
+                <h2>Predict Price</h2>
+                <form id="prediction-form">
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="medinc">Med. Income ($10k)</label>
+                            <input type="number" step="any" id="medinc" name="medinc" required placeholder="e.g. 8.32">
+                        </div>
+                        <div class="input-group">
+                            <label for="houseage">House Age (yrs)</label>
+                            <input type="number" step="any" id="houseage" name="houseage" required placeholder="e.g. 41">
+                        </div>
+                        <div class="input-group">
+                            <label for="averooms">Avg. Rooms</label>
+                            <input type="number" step="any" id="averooms" name="averooms" required placeholder="e.g. 6.98">
+                        </div>
+                        <div class="input-group">
+                            <label for="avebedrms">Avg. Bedrooms</label>
+                            <input type="number" step="any" id="avebedrms" name="avebedrms" required placeholder="e.g. 1.02">
+                        </div>
+                        <div class="input-group">
+                            <label for="population">Population</label>
+                            <input type="number" step="any" id="population" name="population" required placeholder="e.g. 322">
+                        </div>
+                        <div class="input-group">
+                            <label for="aveoccup">Avg. Occupancy</label>
+                            <input type="number" step="any" id="aveoccup" name="aveoccup" required placeholder="e.g. 2.55">
+                        </div>
+                        <div class="input-group">
+                            <label for="latitude">Latitude</label>
+                            <input type="number" step="any" id="latitude" name="latitude" required placeholder="e.g. 37.88">
+                        </div>
+                        <div class="input-group">
+                            <label for="longitude">Longitude</label>
+                            <input type="number" step="any" id="longitude" name="longitude" required placeholder="e.g. -122.23">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-predict">
+                        <span>Run Prediction</span>
+                        <div class="spinner" id="spinner" style="display: none;"></div>
+                    </button>
+                </form>
+                
+                <div id="result-container" class="result-container hidden">
+                    <h3>Estimated Value</h3>
+                    <div id="price-result" class="price-val">--</div>
+                    <p class="error-msg" id="error-msg"></p>
+                </div>
+            </section>
+
+            <section class="eda-section glass-panel">
+                <h2>Exploratory Data Analysis</h2>
+                <p class="eda-desc">Insights generated dynamically during the training pipeline.</p>
+                
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h3>Price Distribution</h3>
+                        <div class="img-wrapper">
+                            <img src="{{ url_for('static', filename='target_dist.png') }}" alt="Target Distribution" onerror="this.src=''; this.alt='Image not available yet.'">
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Feature Correlation</h3>
+                        <div class="img-wrapper">
+                            <img src="{{ url_for('static', filename='corr_heatmap.png') }}" alt="Correlation Heatmap" onerror="this.src=''; this.alt='Image not available yet.'">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
